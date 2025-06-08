@@ -1,0 +1,7 @@
+virtualAddressBits=16
+physicalAddressBits=14
+pageSizeBits=10
+textSize=12
+dataSize=12
+stackSize=11
+pageTableType=SINGLE_LVL
