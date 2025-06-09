@@ -30,4 +30,4 @@ recurso no Moodle. Trabalhos realizados por grupos não cadastrados serão
 desconsiderados. A entrega do trabalho deve ser realizada pelo Moodle
 (código fonte) até o dia 12/06. A apresentação do trabalho será em aula
 nas máquinas do laboratório (em torno de 5 minutos por grupo), sendo que
-todos os integrantes do grupo devem estar presentes.
+todos os integrantes do grupo devem estar presentes. 

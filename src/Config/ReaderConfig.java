@@ -53,7 +53,7 @@ public class ReaderConfig {
             System.out.println(e);
         }
         if(physicalAddressBits > virtualAddressBits) {
-            throw new IllegalArgumentException("Não é possivel ter endereço fisico maiior que endereço virtual.");
+            throw new IllegalArgumentException("Não é possivel ter endereço fisico maior que endereço virtual.");
         }
         return Config.getInstance(virtualAddressBits, physicalAddressBits, pageSizeBits, textSize, dataSize, stackSize, pageType);
     }
