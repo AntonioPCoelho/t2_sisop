@@ -39,6 +39,13 @@ public class Config {
     public int getPageSizeSpace(){
         return (int) Math.pow(2, pageSize);
     }
+
+    public int getVirtualAddressBits() {
+        return virtualAdressBits;
+    }
+    public int getPhysicalAddressBits() {
+        return physicalAdressBits;
+    }
     public int getPageCount() {
         return getVirtualAddressSpace() / pageSize;
     }

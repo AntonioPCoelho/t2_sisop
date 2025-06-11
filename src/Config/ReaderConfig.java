@@ -4,10 +4,13 @@ import PageTable.PageType;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReaderConfig {
 
     private String filePath = "src/Config/Files/config.txt";
+    private String filePathVA = "src/Config/Files/virtualAddress.txt";
 
     public Config readConfigFile(){
         int virtualAddressBits = 0;
@@ -56,5 +59,19 @@ public class ReaderConfig {
             throw new IllegalArgumentException("Não é possivel ter endereço fisico maior que endereço virtual.");
         }
         return Config.getInstance(virtualAddressBits, physicalAddressBits, pageSizeBits, textSize, dataSize, stackSize, pageType);
+    }
+
+    public List<Integer> virtualAdressFile(){
+        List<Integer> virtualAddresses = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePathVA))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                    int address = Integer.parseInt(line.trim());
+                    virtualAddresses.add(address);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return virtualAddresses;
     }
 }

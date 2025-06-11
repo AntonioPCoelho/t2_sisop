@@ -1,6 +1,6 @@
 virtualAddressBits=16
 physicalAddressBits=14
-pageSizeBits=10
+pageSizeBits=12
 textSize=12
 dataSize=12
 stackSize=11

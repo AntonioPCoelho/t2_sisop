@@ -15,14 +15,18 @@ public class SingleLvlTable implements PagleTable{
         Arrays.fill(table, -1);
     }
 
+    public int[] getTable() {
+        return table;
+    }
+
     @Override
     public int getFrameNumber(int virtualPageNumber) {
-        return 0;
+        return table[virtualPageNumber];
     }
 
     @Override
     public void setMapping(int virtualPageNumber, int frameNumber) {
-
+        table[virtualPageNumber] = frameNumber;
     }
 
     @Override
