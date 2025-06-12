@@ -38,8 +38,7 @@ public class Main {
             String physicalMemoryState = Arrays.toString(physicalMem.getFrames());
             outputWriter.writeLine(physicalMemoryState);
             outputWriter.writeLine("\n--- Vetor Final da Tabela de Páginas ---");
-            String virtualMemoryState = Arrays.toString(pageTable.getTable());
-            outputWriter.writeLine(virtualMemoryState);
+            pageTable.printState(outputWriter);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -17,4 +17,6 @@ Binário | VA: 1111011111111111 (pag: 1111, ooffset: 011111111111) -> PA: 110111
 [2, 1, 0, 15]
 
 --- Vetor Final da Tabela de Páginas ---
+
+--- Tabela de Páginas Invertida (Frame -> Página Virtual) ---
 [2, 1, 0, 15]
