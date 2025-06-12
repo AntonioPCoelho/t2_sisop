@@ -10,8 +10,8 @@ import java.util.List;
 
 public class ReaderConfig {
 
-    private String filePath;
-    private String filePathVA;
+    private final String filePath;
+    private final String filePathVA;
     public ReaderConfig() {
         Path basePath = Paths.get("src", "Config", "Files").toAbsolutePath();
         this.filePath = basePath.resolve("config.txt").toString();
