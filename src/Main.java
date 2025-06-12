@@ -34,10 +34,10 @@ public class Main {
                 outputWriter.writeLine(output);
                 outputWriter.writeBinary(virtualAddress, physicalAddress, frame, config);
             }
-            outputWriter.writeLine("\n--- Vertorr Final da Memória Física ---");
+            outputWriter.writeLine("\n--- Vetor Final da Memória Física ---");
             String physicalMemoryState = Arrays.toString(physicalMem.getFrames());
             outputWriter.writeLine(physicalMemoryState);
-            outputWriter.writeLine("\n--- Vertorr Final da Tabela de Páginas ---");
+            outputWriter.writeLine("\n--- Vetor Final da Tabela de Páginas ---");
             String virtualMemoryState = Arrays.toString(pageTable.getTable());
             outputWriter.writeLine(virtualMemoryState);
         } catch (Exception e) {

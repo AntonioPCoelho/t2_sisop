@@ -13,8 +13,8 @@ Binário | VA: 1111100000000000 (pag: 1111, ooffset: 100000000000) -> PA: 111000
 (Virtual Address: 63487 (Page: 15) -> Physical Address: 14335 (Frame: 3) | Segment: .bss, 
 Binário | VA: 1111011111111111 (pag: 1111, ooffset: 011111111111) -> PA: 11011111111111 (frame: 11, offset: 011111111111)
 
---- Vertorr Final da Memória Física ---
+--- Vetor Final da Memória Física ---
 [2, 1, 0, 15]
 
---- Vertorr Final da Tabela de Páginas ---
+--- Vetor Final da Tabela de Páginas ---
 [2, 1, 0, 15]
