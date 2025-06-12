@@ -5,8 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class OutputWriter implements AutoCloseable {
-    private BufferedWriter writer;
-    private String filePath = "src/Config/Files/output.txt";
+    private final BufferedWriter writer;
+    private final String filePath = "src/Config/Files/output.txt";
 
     public OutputWriter() throws IOException {
         this.writer = new BufferedWriter(new FileWriter(filePath));
