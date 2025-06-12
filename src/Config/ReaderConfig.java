@@ -3,13 +3,20 @@ package Config;
 import PageTable.PageType;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderConfig {
 
-    private final String filePath = "src/Config/Files/config.txt";
-    private final String filePathVA = "src/Config/Files/virtualAddress.txt";
+    private String filePath;
+    private String filePathVA;
+    public ReaderConfig() {
+        Path basePath = Paths.get("src", "Config", "Files").toAbsolutePath();
+        this.filePath = basePath.resolve("config.txt").toString();
+        this.filePathVA = basePath.resolve("virtualAddress.txt").toString();
+    }
 
     public Config readConfigFile(){
         int virtualAddressBits = 0;
