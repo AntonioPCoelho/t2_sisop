@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 public class TwoLvlTable implements PageTable {
 
-    private int[] firstLevelTable;
-    private int[][] secondLevelTables;
+    private final int[] firstLevelTable;
+    private final int[][] secondLevelTables;
 
     private final int pt1Bits;
     private final int pt2Bits;

@@ -39,7 +39,7 @@ public class ReaderConfig {
             }
         } catch (Exception e) {
             System.err.println("Erro ao ler o arquivo de configuração: " + e.getMessage()); // Saída de erro aprimorada
-            e.printStackTrace();
+            // e.printStackTrace();
             System.exit(1); // Encerrar o programa em caso de erro crítico de configuração
         }
         if(physicalAddressBits > virtualAddressBits) {
@@ -74,7 +74,7 @@ public class ReaderConfig {
             }
         } catch (Exception e) {
             System.err.println("Erro ao ler o arquivo de endereços virtuais: " + e.getMessage());
-            e.printStackTrace();
+            // e.printStackTrace();
         }
         return virtualAddresses;
     }
