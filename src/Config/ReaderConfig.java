@@ -3,20 +3,14 @@ package Config;
 import PageTable.PageType;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderConfig {
 
-    private final String filePath;
-    private final String filePathVA;
-    public ReaderConfig() {
-        Path basePath = Paths.get("src", "Config", "Files").toAbsolutePath();
-        this.filePath = basePath.resolve("config.txt").toString();
-        this.filePathVA = basePath.resolve("virtualAddress.txt").toString();
-    }
+    private final String filePath = "src/Config/Files/config.txt";
+    private final String filePathVA = "src/Config/Files/virtualAddress.txt";
+    private Config loadedConfig; // Campo para armazenar a configuração lida
 
     public Config readConfigFile(){
         int virtualAddressBits = 0;
@@ -44,24 +38,43 @@ public class ReaderConfig {
                 }
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println("Erro ao ler o arquivo de configuração: " + e.getMessage()); // Saída de erro aprimorada
+            e.printStackTrace();
+            System.exit(1); // Encerrar o programa em caso de erro crítico de configuração
         }
         if(physicalAddressBits > virtualAddressBits) {
             throw new IllegalArgumentException("Não é possivel ter endereço fisico maior que endereço virtual.");
         }
-        return Config.getInstance(virtualAddressBits, physicalAddressBits, pageSizeBits, textSize, dataSize, stackSize, pageType);
+        loadedConfig = Config.getInstance(virtualAddressBits, physicalAddressBits, pageSizeBits, textSize, dataSize, stackSize, pageType);
+        return loadedConfig;
     }
 
     public List<Integer> virtualAdressFile(){
         List<Integer> virtualAddresses = new ArrayList<>();
+        // Garantir que a configuração já foi lida
+        if (loadedConfig == null) {
+            readConfigFile(); // Se não foi lida, tenta ler (idealmente, readConfigFile é chamado antes)
+        }
+        long maxVirtualAddress = (long) Math.pow(2, loadedConfig.getVirtualAddressBits()) - 1; // 2^n - 1
+
         try (BufferedReader reader = new BufferedReader(new FileReader(filePathVA))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                try {
                     int address = Integer.parseInt(line.trim());
-                    virtualAddresses.add(address);
+                    // Validação do endereço virtual
+                    if (address < 0 || address > maxVirtualAddress) {
+                        System.err.println("Aviso: Endereço virtual " + address + " fora do limite (0 a " + maxVirtualAddress + "). Ignorando.");
+                    } else {
+                        virtualAddresses.add(address);
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("Aviso: Linha inválida no arquivo de endereços virtuais (não é um número): '" + line + "'. Ignorando.");
+                }
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println("Erro ao ler o arquivo de endereços virtuais: " + e.getMessage());
+            e.printStackTrace();
         }
         return virtualAddresses;
     }

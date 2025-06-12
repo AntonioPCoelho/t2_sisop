@@ -2,6 +2,7 @@ package PageTable;
 
 import Config.Config;
 import Config.OutputWriter;
+import Memory.PhysicalMem; // Importação necessária
 import java.util.Arrays;
 
 public class InvertedTable implements PageTable{
@@ -43,7 +44,21 @@ public class InvertedTable implements PageTable{
         // Na posição da moldura (frameNumber), armazena qual página virtual (virtualPageNumber) ela contém.
         if (frameNumber >= 0 && frameNumber < numFrames) {
             table[frameNumber] = virtualPageNumber;
+        } else {
+            System.err.println("Erro: Tentativa de mapear página virtual para um frame inválido: " + frameNumber);
         }
+    }
+
+    @Override
+    public int mapPage(int virtualPageNumber, PhysicalMem physicalMem) {
+        int frame = getFrameNumber(virtualPageNumber);
+        if (frame == -1) { // Se a página não está mapeada
+            frame = physicalMem.allocateFrame(virtualPageNumber); // Tenta alocar um frame
+            if (frame != -1) { // Se a alocação foi bem-sucedida
+                setMapping(virtualPageNumber, frame); // Mapeia a página virtual para o frame
+            }
+        }
+        return frame; // Retorna o frame (pode ser -1 se a memória estiver cheia)
     }
 
     @Override

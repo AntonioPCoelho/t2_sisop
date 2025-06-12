@@ -2,12 +2,16 @@ package PageTable;
 
 import Config.Config;
 import Config.OutputWriter;
+import Memory.PhysicalMem; // Importação necessária
 
 public interface PageTable {
 
     int[] getTable();
 
     int getFrameNumber(int virtualPageNumber);
+
+    // Novo método na interface para lidar com mapeamento e alocação, se necessário
+    int mapPage(int virtualPageNumber, PhysicalMem physicalMem);
 
     void setMapping(int virtualPageNumber, int frameNumber);
 

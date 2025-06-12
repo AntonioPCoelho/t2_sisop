@@ -3,7 +3,6 @@ package Memory;
 import Config.Config;
 import PageTable.PageTable;
 
-
 public class MMU {
 
     private final PhysicalMem physicalMem;
@@ -20,34 +19,18 @@ public class MMU {
         int pageSize = config.getPageSizeSpace();
         int virtualPageNumber = virtualAddress / pageSize;
         int offset = virtualAddress % pageSize;
-        int frame = pageTable.getFrameNumber(virtualPageNumber);
-        return switch (config.getPageType()) {
-            case SINGLE_LVL -> {
-                if (frame == -1) {
-                    frame = physicalMem.allocateFrame(virtualPageNumber);
-                    if (frame == -1) {
-                        yield -1;
-                    }
-                    pageTable.setMapping(virtualPageNumber, frame);
-                }
-                yield frame * pageSize + offset;
-            }
-            case INVERTED -> {
-                // Se a página não está na tabela, aloca uma nova moldura.
-                if (frame == -1) {
-                    frame = physicalMem.allocateFrame(virtualPageNumber);
-                    // Se a memória física estiver cheia, retorna erro.
-                    if (frame == -1) {
-                        yield -1;
-                    }
-                    // Atualiza a tabela invertida com o novo mapeamento.
-                    pageTable.setMapping(virtualPageNumber, frame);
-                }
-                // Calcula o endereço físico final.
-                yield frame * pageSize + offset;
-            }
-            case TWO_LVL -> -1;
-            default -> -1;
-        };
+
+        // A lógica de alocação e mapeamento é agora responsabilidade da PageTable.
+        // O método mapPage retornará o frame number, alocando-o se necessário.
+        int frame = pageTable.mapPage(virtualPageNumber, physicalMem);
+
+        if (frame == -1) {
+            // Se mapPage retornou -1, significa que a memória física está cheia
+            // ou houve algum problema no mapeamento/alocação.
+            return -1;
+        }
+
+        // Calcula o endereço físico final
+        return frame * pageSize + offset;
     }
 }
