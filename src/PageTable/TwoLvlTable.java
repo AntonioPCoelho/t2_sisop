@@ -3,7 +3,7 @@ package PageTable;
 import Config.Config;
 import Config.OutputWriter;
 
-public class TwoLvlTable implements PagleTable {
+public class TwoLvlTable implements PageTable {
 
     private int[] firstLevelTable;
     private int[] secondLevelTables;

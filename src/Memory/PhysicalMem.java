@@ -1,14 +1,13 @@
 package Memory;
 import Config.Config;
-
 import java.util.Arrays;
 
 public class PhysicalMem {
 
-    private int[] frames;
+    private final int[] frames;
     private int frameCount;
-    private int numFrames;
-    private int pageSize;
+    private final int numFrames;
+    private final int pageSize;
 
     public PhysicalMem(Config config) {
         this.numFrames = config.getPhysicalAddressSpace()/ config.getPageSizeSpace();

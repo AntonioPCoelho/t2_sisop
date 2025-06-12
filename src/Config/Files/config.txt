@@ -4,4 +4,4 @@ pageSizeBits=12
 textSize=12
 dataSize=12
 stackSize=11
-pageTableType=SINGLE_LVL
+pageTableType=INVERTED

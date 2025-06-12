@@ -1,14 +1,10 @@
 import Config.Config;
-import Config.ReaderConfig;
 import Config.OutputWriter;
+import Config.ReaderConfig;
 import Memory.MMU;
 import Memory.PhysicalMem;
 import Memory.VirtualMem;
-import PageTable.PagleTable;
-import PageTable.SingleLvlTable;
-
-import java.awt.print.Pageable;
-import java.io.IOException;
+import PageTable.PageTable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +15,7 @@ public class Main {
         PhysicalMem physicalMem = new PhysicalMem(config);
         VirtualMem virtualMem = new VirtualMem(config);
         List<Integer> virtualAddresses = readerConfig.virtualAdressFile();
-        PagleTable pageTable = PagleTable.create(config);
+        PageTable pageTable = PageTable.create(config);
         MMU mmu = new MMU(physicalMem, pageTable, config);
 
         try(OutputWriter outputWriter = new OutputWriter()) {

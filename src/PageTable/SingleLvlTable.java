@@ -2,12 +2,11 @@ package PageTable;
 
 import Config.Config;
 import Config.OutputWriter;
-
 import java.util.Arrays;
 
-public class SingleLvlTable implements PagleTable{
+public class SingleLvlTable implements PageTable{
 
-    private int[] table;
+    private final int[] table;
 
     public SingleLvlTable(Config config) {
         int numVirtualPages = config.getVirtualAddressSpace() / config.getPageSizeSpace();
@@ -15,6 +14,7 @@ public class SingleLvlTable implements PagleTable{
         Arrays.fill(table, -1);
     }
 
+    @Override
     public int[] getTable() {
         return table;
     }

@@ -1,7 +1,6 @@
 package Config;
 
 import PageTable.PageType;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -9,8 +8,8 @@ import java.util.List;
 
 public class ReaderConfig {
 
-    private String filePath = "src/Config/Files/config.txt";
-    private String filePathVA = "src/Config/Files/virtualAddress.txt";
+    private final String filePath = "src/Config/Files/config.txt";
+    private final String filePathVA = "src/Config/Files/virtualAddress.txt";
 
     public Config readConfigFile(){
         int virtualAddressBits = 0;
@@ -27,29 +26,14 @@ public class ReaderConfig {
                 String key = parts[0].trim();
                 String value = parts[1].trim();
                 switch (key) {
-                    case "virtualAddressBits":
-                        virtualAddressBits = Integer.parseInt(value);
-                        break;
-                    case "physicalAddressBits":
-                        physicalAddressBits = Integer.parseInt(value);
-                        break;
-                    case "pageSizeBits":
-                        pageSizeBits = Integer.parseInt(value);
-                        break;
-                    case "textSize":
-                        textSize = Integer.parseInt(value);
-                        break;
-                    case "dataSize":
-                        dataSize = Integer.parseInt(value);
-                        break;
-                    case "stackSize":
-                        stackSize = Integer.parseInt(value);
-                        break;
-                    case "pageTableType":
-                        pageType = PageType.valueOf(value.toUpperCase());
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Chave desconhecida: " + key);
+                    case "virtualAddressBits" -> virtualAddressBits = Integer.parseInt(value);
+                    case "physicalAddressBits" -> physicalAddressBits = Integer.parseInt(value);
+                    case "pageSizeBits" -> pageSizeBits = Integer.parseInt(value);
+                    case "textSize" -> textSize = Integer.parseInt(value);
+                    case "dataSize" -> dataSize = Integer.parseInt(value);
+                    case "stackSize" -> stackSize = Integer.parseInt(value);
+                    case "pageTableType" -> pageType = PageType.valueOf(value.toUpperCase());
+                    default -> throw new IllegalArgumentException("Chave desconhecida: " + key);
                 }
             }
         } catch (Exception e) {

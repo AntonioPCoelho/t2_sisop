@@ -4,7 +4,7 @@ import Config.Config;
 
 public class VirtualMem {
 
-    private Config config;
+    private final Config config;
 
     private final int endOfText;
     private final int endOfData;
